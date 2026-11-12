@@ -184,7 +184,8 @@ class SedKeyboardService : InputMethodService() {
     private fun buildEmojiPage() {
         emojiRows.forEach { row ->
             val line = LinearLayout(this).apply { gravity = Gravity.CENTER; orientation = LinearLayout.HORIZONTAL }
-            row.forEach { emoji ->
+            row.forEach { character ->
+                val emoji = character.toString()
                 line.addView(key(emoji, 1f) {
                     currentInputConnection?.commitText(emoji, 1)
                 })
