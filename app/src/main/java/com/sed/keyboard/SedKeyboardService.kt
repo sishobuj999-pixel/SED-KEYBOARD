@@ -28,7 +28,11 @@ class SedKeyboardService : InputMethodService() {
     private val englishRows = listOf("qwertyuiop", "asdfghjkl", "zxcvbnm")
     private val banglaRows = listOf("ৌৈাীূবহগদ", "োে্িুপটচজ", "কতডরনসলম")
     private val symbolsRows = listOf("1234567890", "@#\$%&-*+()", "!?:;'/\"")
-    private val emojiRows = listOf("😀😂🥰😍😊😭😎🤔", "👍🙏❤️🔥🎉✨💯🤝", "🌸🌙☀️🍎⚽🚗🐱🐶")
+    private val emojiRows = listOf(
+        listOf("😀", "😂", "🥰", "😍", "😊", "😭", "😎", "🤔"),
+        listOf("👍", "🙏", "❤️", "🔥", "🎉", "✨", "💯", "🤝"),
+        listOf("🌸", "🌙", "☀️", "🍎", "⚽", "🚗", "🐱", "🐶")
+    )
     private val dictionary = listOf(
         "the", "there", "their", "then", "this", "that", "thanks", "think",
         "you", "your", "you're", "yes", "yeah", "and", "are", "about",
@@ -184,8 +188,7 @@ class SedKeyboardService : InputMethodService() {
     private fun buildEmojiPage() {
         emojiRows.forEach { row ->
             val line = LinearLayout(this).apply { gravity = Gravity.CENTER; orientation = LinearLayout.HORIZONTAL }
-            row.forEach { character ->
-                val emoji = character.toString()
+            row.forEach { emoji ->
                 line.addView(key(emoji, 1f) {
                     currentInputConnection?.commitText(emoji, 1)
                 })
