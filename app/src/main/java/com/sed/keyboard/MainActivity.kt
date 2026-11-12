@@ -17,24 +17,19 @@ class MainActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val dark = prefs.getBoolean("dark", false)
-        val bg = if (dark) 0xff202124.toInt() else 0xfff4f6f8.toInt()
-        val fg = if (dark) 0xffffffff.toInt() else 0xff202124.toInt()
         val root = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            gravity = Gravity.CENTER_HORIZONTAL
             setPadding(24, 32, 24, 24)
-            setBackgroundColor(bg)
+            gravity = Gravity.CENTER_HORIZONTAL
         }
         root.addView(TextView(this).apply {
             text = "SED Keyboard"
             textSize = 28f
-            setTextColor(fg)
+            setTextColor(0xff202124.toInt())
         })
         root.addView(TextView(this).apply {
-            text = "Lightweight typing. Your keystrokes stay on your device."
+            text = "A lightweight keyboard for everyday typing."
             textSize = 14f
-            setTextColor(fg)
             setPadding(0, 8, 0, 24)
         })
 
@@ -52,20 +47,25 @@ class MainActivity : Activity() {
             (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).showInputMethodPicker()
         }
 
+        root.addView(TextView(this).apply {
+            text = "Keyboard preferences"
+            textSize = 18f
+            setTextColor(0xff202124.toInt())
+            setPadding(0, 20, 0, 8)
+        })
+
         val darkSwitch = Switch(this).apply {
             text = "Dark keyboard"
-            setTextColor(fg)
             isChecked = prefs.getBoolean("dark", false)
             setOnCheckedChangeListener { _, checked ->
                 prefs.edit().putBoolean("dark", checked).apply()
             }
         }
-        root.addView(darkSwitch, LinearLayout.LayoutParams(-1, -2).apply { topMargin = 16; bottomMargin = 12 })
+        root.addView(darkSwitch, LinearLayout.LayoutParams(-1, -2))
 
         val vibrationSwitch = Switch(this).apply {
             text = "Key vibration"
-            setTextColor(fg)
-            isChecked = prefs.getBoolean("vibration", false)
+            isChecked = prefs.getBoolean("vibration", true)
             setOnCheckedChangeListener { _, checked ->
                 prefs.edit().putBoolean("vibration", checked).apply()
             }
@@ -73,10 +73,10 @@ class MainActivity : Activity() {
         root.addView(vibrationSwitch, LinearLayout.LayoutParams(-1, -2))
 
         root.addView(TextView(this).apply {
-            text = "Included\n• English and Bangla character layouts\n• On-device word completion\n• Number and symbol page\n• Emoji panel\n• Dark appearance and optional vibration\n• No internet permission, ads, or analytics\n\nNot included yet: Bangla phonetic typing, voice typing, glide typing, cloud sync, or Gboard-level prediction."
-            textSize = 15f
-            setTextColor(fg)
-            setPadding(0, 28, 0, 0)
+            text = "Included: English and Bangla character layouts, basic word completion, symbols, emoji panel, shift, delete and editor action keys. No internet permission, ads or analytics. Bangla phonetic typing, voice typing and glide typing are not included yet."
+            textSize = 14f
+            setTextColor(0xff444444.toInt())
+            setPadding(0, 24, 0, 0)
         })
         setContentView(root)
     }
