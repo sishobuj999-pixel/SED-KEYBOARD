@@ -1,23 +1,17 @@
-# SED Battle Survival — Prototype 0.1
+# SED Battle Survival — Godot 4 prototype
 
-A lightweight offline third-person 3D arena shooter prototype made with Godot 4.
+An offline, third-person 3D survival-shooter prototype.
 
-## Current prototype features
-- Procedurally generated low-poly arena, ground, boundary walls and cover.
-- Third-person player character and follow camera.
-- Keyboard movement for desktop testing and touch-look / touch-move input for mobile.
-- Hitscan shooting, magazine and reserve ammo, reload control.
-- Six simple AI enemies that pursue and damage the player.
-- Health, ammo, enemy count and kill HUD.
-- Fully offline gameplay; the game scene makes no network requests.
+## Current implementation
+- Procedural low-poly arena with cover and boundary walls
+- Third-person player capsule and camera
+- Keyboard movement and preliminary touch movement/look input
+- Hitscan shooting, ammo, reload, health and kill HUD
+- Six basic chasing AI bots
+- No network requests in the gameplay scene
 
-## Run
-Open this folder in Godot 4.3+ and run main.tscn.
+## Android build
+The repository includes an Android export preset and a GitHub Actions workflow. Push a change under `BattleSurvival/` or manually run **Build SED Battle Survival Android APK** from the Actions tab. The APK is uploaded as a workflow artifact named `SED-Battle-Survival-Android`.
 
-## Roadmap
-- Android export preset and automated APK build.
-- Dedicated mobile joystick, aim/fire controls and settings.
-- Loot, multiple weapons, safe zone, missions and larger maps.
-- GitHub Releases-based in-game update checker and Android package installer flow.
-
-This is an early playable prototype, not a finished battle royale game.
+## Important status
+This is an early prototype, not a complete battle-royale game. The mobile controls, combat/AI balance, loot, weapons, safe zone, missions, settings, persistence, updater, and on-device testing still need work. An APK build must pass in GitHub Actions before it can be treated as installable.
