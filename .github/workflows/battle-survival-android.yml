@@ -1,0 +1,33 @@
+name: Build SED Battle Survival Android APK
+
+on:
+  push:
+    paths:
+      - "BattleSurvival/**"
+      - ".github/workflows/battle-survival-android.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:4.3.0
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Export Android APK
+        working-directory: BattleSurvival
+        run: |
+          mkdir -p build
+          godot --headless --path . --editor --quit
+          godot --headless --path . --export-debug "Android" build/SED-Battle-Survival.apk
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SED-Battle-Survival-Android
+          path: BattleSurvival/build/SED-Battle-Survival.apk
+          if-no-files-found: error
+          retention-days: 14
