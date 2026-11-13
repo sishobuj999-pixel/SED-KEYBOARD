@@ -54,6 +54,15 @@ class MainActivity : Activity() {
             setPadding(0, 20, 0, 8)
         })
 
+        val transparentSwitch = Switch(this).apply {
+            text = "Transparent keyboard"
+            isChecked = prefs.getBoolean("transparent", true)
+            setOnCheckedChangeListener { _, checked ->
+                prefs.edit().putBoolean("transparent", checked).apply()
+            }
+        }
+        root.addView(transparentSwitch, LinearLayout.LayoutParams(-1, -2))
+
         val darkSwitch = Switch(this).apply {
             text = "Dark keyboard"
             isChecked = prefs.getBoolean("dark", false)
@@ -73,7 +82,7 @@ class MainActivity : Activity() {
         root.addView(vibrationSwitch, LinearLayout.LayoutParams(-1, -2))
 
         root.addView(TextView(this).apply {
-            text = "Included: English and Bangla character layouts, basic word completion, symbols, emoji panel, shift, delete and editor action keys. No internet permission, ads or analytics. Bangla phonetic typing, voice typing and glide typing are not included yet."
+            text = "Included: large easy-to-press keys, transparent style, English and Bangla character layouts, basic word completion, symbols, emoji panel, continuous hold-to-delete, shift and editor action keys. No internet permission, ads or analytics. Bangla phonetic typing, voice typing and glide typing are not included yet."
             textSize = 14f
             setTextColor(0xff444444.toInt())
             setPadding(0, 24, 0, 0)
