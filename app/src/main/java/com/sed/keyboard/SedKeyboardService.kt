@@ -50,7 +50,6 @@ class SedKeyboardService : InputMethodService() {
     override fun onCreate() {
         super.onCreate()
         prefs = getSharedPreferences("keyboard", Context.MODE_PRIVATE)
-        window?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     }
 
     override fun onCreateInputView(): View = buildKeyboard()
